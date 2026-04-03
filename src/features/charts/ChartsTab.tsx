@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { SINGLE_COLUMN_RESULTS, GROUP_COLUMN_RESULTS, PRESSURE_LEVELS, SOIL_STATES, CHART_COLORS, NUMERICAL_N_BY_EC, NUMERICAL_N_BY_ES, NUMERICAL_N_BY_J } from '../../lib/data';
-import { BarChart3, Download } from 'lucide-react';
+import { BarChart3 } from 'lucide-react';
 
 const tooltipStyle = { background: '#1e293b', border: '1px solid #334155', borderRadius: 8, fontSize: 12 };
 
@@ -107,7 +107,7 @@ function LoadSettlementChart() {
           <YAxis reversed stroke="#64748b" label={{ value: 'Độ lún S (mm)', angle: -90, position: 'insideLeft', style: { fill: '#94a3b8', fontSize: 12 } }} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend wrapperStyle={{ fontSize: 11 }} />
-          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD]} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD.replace('sD_', '').replace('5', ',5').replace('0', ',0')}`} />)}
+          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD] as string} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
         </LineChart>
       </ResponsiveContainer>
       <p className="text-xs text-surface-600 mt-2 italic">Dữ liệu thực nghiệm từ luận án</p>
@@ -131,7 +131,7 @@ function ColumnStressChart() {
           <YAxis stroke="#64748b" label={{ value: 'σc (kPa)', angle: -90, position: 'insideLeft', style: { fill: '#94a3b8', fontSize: 12 } }} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend wrapperStyle={{ fontSize: 11 }} />
-          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD]} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
+          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD] as string} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
         </LineChart>
       </ResponsiveContainer>
     </>
@@ -154,7 +154,7 @@ function SoilPressureChart() {
           <YAxis stroke="#64748b" label={{ value: 'σs (kPa)', angle: -90, position: 'insideLeft', style: { fill: '#94a3b8', fontSize: 12 } }} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend wrapperStyle={{ fontSize: 11 }} />
-          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD]} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
+          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD] as string} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
         </LineChart>
       </ResponsiveContainer>
     </>
@@ -177,7 +177,7 @@ function GeogridStrainChart() {
           <YAxis stroke="#64748b" label={{ value: 'T (kN/m)', angle: -90, position: 'insideLeft', style: { fill: '#94a3b8', fontSize: 12 } }} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend wrapperStyle={{ fontSize: 11 }} />
-          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD]} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
+          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD] as string} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
         </LineChart>
       </ResponsiveContainer>
     </>
@@ -200,7 +200,7 @@ function StressConcentrationChart() {
           <YAxis stroke="#64748b" domain={[1.5, 4]} label={{ value: 'n = σc/σs', angle: -90, position: 'insideLeft', style: { fill: '#94a3b8', fontSize: 12 } }} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend wrapperStyle={{ fontSize: 11 }} />
-          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD]} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
+          {GROUP_COLUMN_RESULTS.map(r => <Line key={r.sD} type="monotone" dataKey={r.sD} stroke={CHART_COLORS[r.sD] as string} strokeWidth={2} dot={{ r: 3 }} name={`s/D = ${r.sD === 'sD_25' ? '2,5' : r.sD === 'sD_30' ? '3,0' : '3,5'}`} />)}
         </LineChart>
       </ResponsiveContainer>
     </>

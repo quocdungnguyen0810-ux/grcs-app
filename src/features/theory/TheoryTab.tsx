@@ -51,7 +51,7 @@ export default function TheoryTab() {
                     <ExpandableSection key={sub.id} title={sub.title} defaultOpen={sub.id === 'E50'}>
                       <div className="space-y-3">
                         <p className="text-sm text-surface-300">{sub.content}</p>
-                        {sub.formula && <FormulaPanel formula={sub.formula} />}
+                        {'formula' in sub && sub.formula && <FormulaPanel formula={sub.formula as string} />}
                         {'values' in sub && Array.isArray(sub.values) && (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             {(sub.values as Array<Record<string, string>>).map((v, i) => (

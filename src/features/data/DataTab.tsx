@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SINGLE_COLUMN_RESULTS, GROUP_COLUMN_RESULTS, PRESSURE_LEVELS, SOIL_STATES, SPACING_RATIOS } from '../../lib/data';
+import { SINGLE_COLUMN_RESULTS, GROUP_COLUMN_RESULTS, PRESSURE_LEVELS, SOIL_STATES } from '../../lib/data';
 import { Database, Download, Upload, FileJson } from 'lucide-react';
 
 export default function DataTab() {
