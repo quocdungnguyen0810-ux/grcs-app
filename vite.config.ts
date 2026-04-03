@@ -4,6 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/grcs-app/',   // ← tên repo GitHub của bạn
+  // base: '/grcs-app/',  ← chỉ cần nếu dùng GitHub Pages
 })
 
