@@ -1,0 +1,388 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@theme {
+  /* ===== UTC 3 BRAND COLORS ===== */
+  /* 1. UTC Primary Blue — Xanh dương đậm */
+  --color-primary-50: #e8eef6;
+  --color-primary-100: #c5d4e9;
+  --color-primary-200: #9eb8db;
+  --color-primary-300: #7699ca;
+  --color-primary-400: #4e7ab9;
+  --color-primary-500: #1a4f8b;
+  --color-primary-600: #143f71;
+  --color-primary-700: #0f3260;
+  --color-primary-800: #0a2e5c;
+  --color-primary-900: #071d3a;
+  --color-primary-950: #041225;
+
+  /* 2. UTC Gold — Vàng */
+  --color-accent-50: #fef9e7;
+  --color-accent-100: #fdf0c3;
+  --color-accent-200: #fce49b;
+  --color-accent-300: #fad56e;
+  --color-accent-400: #f5b731;
+  --color-accent-500: #d4a017;
+  --color-accent-600: #b08514;
+  --color-accent-700: #8c6a10;
+  --color-accent-800: #6b510c;
+  --color-accent-900: #4a3808;
+
+  /* 3. UTC Gray — Ghi */
+  --color-utc-gray: #6b7b8d;
+  --color-utc-gray-light: #8d9bab;
+  --color-utc-gray-dark: #4a5568;
+
+  /* Neutral Surface */
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+  --color-surface-500: #64748b;
+  --color-surface-600: #475569;
+  --color-surface-700: #334155;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #020617;
+
+  /* Semantic */
+  --color-earth: #92400e;
+  --color-earth-light: #d97706;
+  --color-column: #6b7280;
+  --color-column-light: #9ca3af;
+  --color-geogrid: #059669;
+  --color-geogrid-light: #34d399;
+  --color-sand: #fbbf24;
+  --color-sand-light: #fde68a;
+  --color-stress-high: #ef4444;
+  --color-stress-mid: #f59e0b;
+  --color-stress-low: #22c55e;
+
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 15px;
+  }
+
+  body {
+    @apply bg-surface-950 text-surface-100 font-sans antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    letter-spacing: -0.01em;
+  }
+
+  /* Academic notation */
+  sub, sup {
+    font-size: 0.7em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub { bottom: -0.25em; }
+  sup { top: -0.5em; }
+  .sym { font-style: italic; font-family: 'Inter', serif; }
+  .sym sub, .sym sup { font-style: normal; }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-500;
+  }
+}
+
+/* =====================================================
+   COMPONENT CLASSES
+   Written as plain CSS to avoid Tailwind v4 @apply
+   cross-reference issues inside @layer components.
+   ===================================================== */
+
+/* === Glass Cards === */
+.glass-card {
+  background: rgb(30 41 59 / 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgb(51 65 85 / 0.5);
+  border-radius: 1rem;
+}
+.glass-card-darker {
+  background: rgb(15 23 42 / 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgb(51 65 85 / 0.4);
+  border-radius: 1rem;
+}
+
+/* === UTC Branding === */
+.utc-header {
+  background: rgb(10 46 92 / 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 2px solid rgb(245 183 49 / 0.6);
+}
+.utc-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #0a2e5c 0%, #143f71 40%, #1a4f8b 70%, #0f3260 100%);
+}
+.utc-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(135deg, transparent 0%, rgba(245, 183, 49, 0.08) 100%);
+  pointer-events: none;
+}
+.utc-chapter-card {
+  /* glass-card base */
+  background: rgb(30 41 59 / 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgb(51 65 85 / 0.5);
+  border-radius: 1rem;
+  /* chapter-card extras */
+  border-left: 4px solid var(--color-accent-400);
+  padding: 1.25rem;
+  transition: all 0.2s;
+}
+.utc-chapter-card:hover {
+  border-left-color: var(--color-accent-300);
+  background: rgb(51 65 85 / 0.6);
+}
+.utc-divider {
+  @apply border-t border-primary-700/40 my-6;
+}
+.utc-callout {
+  @apply p-4 rounded-xl border border-accent-400/30 bg-accent-400/5;
+}
+.utc-formula {
+  @apply p-4 rounded-xl bg-primary-900/40 border border-primary-700/40 font-mono text-center;
+}
+.utc-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-400/15 text-accent-400 border border-accent-400/20;
+}
+
+/* === Sidebar === */
+.sidebar-item {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer;
+}
+.sidebar-item:hover {
+  @apply bg-surface-700/50 text-surface-100;
+}
+.sidebar-item.active {
+  @apply bg-primary-700/25 text-accent-400 border-l-2 border-accent-400;
+}
+.sidebar-group-title {
+  @apply text-[10px] font-bold uppercase tracking-wider text-surface-500 px-4 pt-4 pb-1;
+}
+
+/* === Stat Cards === */
+.stat-card {
+  /* glass-card base inlined */
+  background: rgb(30 41 59 / 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgb(51 65 85 / 0.5);
+  border-radius: 1rem;
+  /* stat-card extras */
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* === Buttons === */
+.btn-primary {
+  @apply px-4 py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-medium transition-colors duration-200 text-sm;
+}
+.btn-accent {
+  @apply px-4 py-2 bg-accent-500 hover:bg-accent-400 text-primary-900 rounded-lg font-medium transition-colors duration-200 text-sm;
+}
+.btn-secondary {
+  @apply px-4 py-2 bg-surface-700 hover:bg-surface-600 text-surface-200 rounded-lg font-medium transition-colors duration-200 text-sm;
+}
+.btn-outline {
+  @apply px-4 py-2 border border-surface-600 hover:border-accent-400 hover:text-accent-400 text-surface-300 rounded-lg font-medium transition-colors duration-200 text-sm;
+}
+
+/* === Form === */
+.input-field {
+  @apply bg-surface-800 border border-surface-600 rounded-lg px-3 py-2 text-sm text-surface-100 focus:border-accent-400 focus:outline-none focus:ring-1 focus:ring-accent-400/50 transition-colors;
+}
+
+/* === Tabs === */
+.tab-button {
+  @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+}
+.tab-button.active {
+  @apply bg-accent-400/15 text-accent-400;
+}
+.tab-button:not(.active) {
+  @apply text-surface-400 hover:text-surface-200 hover:bg-surface-700/50;
+}
+
+/* === Typography === */
+.section-title {
+  @apply text-lg font-semibold text-surface-100 mb-4;
+}
+.label-vi {
+  @apply text-surface-100 font-medium;
+}
+.label-en {
+  @apply text-surface-500 text-xs italic;
+}
+
+/* === Charts === */
+.chart-container {
+  /* glass-card base inlined */
+  background: rgb(30 41 59 / 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgb(51 65 85 / 0.5);
+  border-radius: 1rem;
+  /* chart extras */
+  padding: 1.5rem;
+}
+
+/* === Tables === */
+.data-table {
+  @apply w-full text-sm;
+}
+.data-table th {
+  @apply text-left px-3 py-2 bg-primary-900/40 text-primary-200 font-medium border-b border-primary-700/40 first:rounded-tl-lg last:rounded-tr-lg;
+}
+.data-table td {
+  @apply px-3 py-2 border-b border-surface-800 text-surface-200;
+}
+.data-table tr:hover td {
+  @apply bg-surface-800/50;
+}
+
+/* === Badges === */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+.badge-blue { @apply bg-primary-600/20 text-primary-400; }
+.badge-green { @apply bg-emerald-600/20 text-emerald-400; }
+.badge-amber { @apply bg-accent-400/15 text-accent-400; }
+.badge-red { @apply bg-red-600/20 text-red-400; }
+.badge-utc { @apply bg-accent-400/15 text-accent-400 border border-accent-400/20 font-semibold; }
+
+/* === Presentation mode === */
+.presentation-mode .glass-card {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.presentation-mode .section-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.presentation-mode .utc-hero {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* === Academic Content === */
+.formula-panel {
+  /* utc-formula base inlined */
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgb(7 29 58 / 0.4);
+  border: 1px solid rgb(15 50 96 / 0.4);
+  font-family: var(--font-mono);
+  text-align: center;
+  /* formula-panel extras */
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--color-accent-300);
+}
+.insight-box {
+  @apply p-4 bg-primary-900/30 border border-primary-700/30 rounded-xl;
+}
+.insight-box-highlight {
+  @apply p-4 bg-accent-400/5 border border-accent-400/20 rounded-xl;
+}
+.expandable-header {
+  @apply flex items-center gap-3 w-full text-left px-4 py-3 rounded-xl transition-all cursor-pointer hover:bg-surface-700/40;
+}
+
+/* === MathType-style Formula Rendering === */
+.math-formula {
+  font-family: 'Cambria Math', 'Latin Modern Math', 'STIX Two Math', 'Times New Roman', serif;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+.math-display {
+  display: block;
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  padding: 0.5rem 0;
+}
+.math-inline {
+  display: inline;
+  font-size: inherit;
+}
+.math-formula .math-greek {
+  font-style: normal;
+  font-weight: 400;
+}
+.math-formula .math-sub {
+  font-size: 0.7em;
+  vertical-align: sub;
+  font-style: italic;
+}
+.math-formula .math-sup {
+  font-size: 0.7em;
+  vertical-align: super;
+  font-style: italic;
+}
+.math-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 0.15em;
+}
+.math-frac-num {
+  border-bottom: 1.5px solid currentColor;
+  padding: 0 0.2em 0.1em;
+  font-size: 0.85em;
+  line-height: 1.2;
+}
+.math-frac-den {
+  padding: 0.1em 0.2em 0;
+  font-size: 0.85em;
+  line-height: 1.2;
+}
+
+/* Scientific symbol inline (for HTML sub/sup rendering) */
+.sym {
+  font-family: 'Cambria Math', 'Latin Modern Math', 'Times New Roman', serif;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+/* Badge variants */
+.badge-green {
+  @apply bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+}
+
