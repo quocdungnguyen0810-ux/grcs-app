@@ -194,6 +194,74 @@
   @apply text-[10px] font-bold uppercase tracking-wider text-surface-500 px-4 pt-4 pb-1;
 }
 
+/* === Icon-only Sidebar (Tablet) === */
+.icon-sidebar {
+  width: 52px;
+  background: rgb(2 6 23 / 0.7);
+  backdrop-filter: blur(16px);
+}
+.icon-sidebar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 0.625rem;
+  color: var(--color-surface-400);
+  transition: all 0.15s;
+  margin: 0 auto;
+  position: relative;
+}
+.icon-sidebar-btn:hover {
+  background: rgb(51 65 85 / 0.5);
+  color: var(--color-surface-100);
+}
+.icon-sidebar-btn.active {
+  background: rgb(15 50 96 / 0.4);
+  color: var(--color-accent-400);
+  box-shadow: inset 2px 0 0 var(--color-accent-400);
+}
+
+/* === Bottom Navigation Bar (Mobile) === */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: stretch;
+  height: 64px;
+  background: rgb(2 6 23 / 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgb(51 65 85 / 0.5);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--color-surface-500);
+  transition: all 0.15s;
+  padding: 0 4px;
+  letter-spacing: 0.02em;
+}
+.bottom-nav-item:hover {
+  color: var(--color-surface-300);
+}
+.bottom-nav-item.active {
+  color: var(--color-accent-400);
+}
+.bottom-nav-item.active svg {
+  filter: drop-shadow(0 0 6px rgb(245 183 49 / 0.5));
+}
+
 /* === Stat Cards === */
 .stat-card {
   /* glass-card base inlined */
@@ -386,3 +454,17 @@
   @apply bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
 }
 
+/* === Tablet header height === */
+.h-13 { height: 3.25rem; }
+
+/* === Mobile responsive text === */
+@media (max-width: 639px) {
+  html { font-size: 14px; }
+  .glass-card { padding: 0.875rem; }
+  .section-title { font-size: 1rem; }
+}
+
+/* === Tablet responsive === */
+@media (min-width: 640px) and (max-width: 1023px) {
+  html { font-size: 14.5px; }
+}

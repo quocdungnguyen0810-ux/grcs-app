@@ -1,9 +1,13 @@
 import { create } from 'zustand';
 import type { AppMode, SoilState, SpacingRatio } from '../lib/types';
 
+export type ViewLayout = 'mobile' | 'tablet' | 'desktop';
+
 interface AppState {
   activeTab: number;
   mode: AppMode;
+  viewLayout: ViewLayout;
+  viewLayoutOverride: ViewLayout | null; // manual override by user
   selectedScenarioIds: string[];
   selectedSoilState: SoilState;
   selectedSpacing: SpacingRatio;
@@ -15,6 +19,8 @@ interface AppState {
 
   setActiveTab: (tab: number) => void;
   setMode: (mode: AppMode) => void;
+  setViewLayout: (layout: ViewLayout) => void;
+  setViewLayoutOverride: (layout: ViewLayout | null) => void;
   setSelectedSoilState: (s: SoilState) => void;
   setSelectedSpacing: (s: SpacingRatio) => void;
   setShowGeogrid: (v: boolean) => void;
@@ -29,6 +35,8 @@ interface AppState {
 export const useAppStore = create<AppState>((set) => ({
   activeTab: 0,
   mode: 'defense',
+  viewLayout: 'desktop',
+  viewLayoutOverride: null,
   selectedScenarioIds: [],
   selectedSoilState: 'IL_078',
   selectedSpacing: 'sD_25',
@@ -40,6 +48,8 @@ export const useAppStore = create<AppState>((set) => ({
 
   setActiveTab: (tab) => set({ activeTab: tab }),
   setMode: (mode) => set({ mode }),
+  setViewLayout: (layout) => set({ viewLayout: layout }),
+  setViewLayoutOverride: (layout) => set({ viewLayoutOverride: layout }),
   setSelectedSoilState: (s) => set({ selectedSoilState: s }),
   setSelectedSpacing: (s) => set({ selectedSpacing: s }),
   setShowGeogrid: (v) => set({ showGeogrid: v }),
