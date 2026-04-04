@@ -1,4 +1,4 @@
-import { SOIL_PROPERTIES, COLUMN_MATERIAL, GEOGRID_PROPERTIES, SOIL_STATES, MODEL_SCALE_TABLE, SAND_CUSHION, SPACING_RATIOS } from '../../lib/data';
+import { SOIL_PROPERTIES, COLUMN_MATERIAL, GEOGRID_PROPERTIES, SOIL_STATES, MODEL_SCALE_TABLE, SAND_CUSHION, SPACING_RATIOS, GEOGRID_SCALE_TABLE } from '../../lib/data';
 import type { MaterialProperty } from '../../lib/types';
 import { Database, Layers, Grid3x3, Ruler } from 'lucide-react';
 
@@ -124,6 +124,43 @@ export default function ParametersTab() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Lưới ĐKT: Nguyên mẫu vs Mô hình */}
+      <div className="glass-card p-5">
+        <h3 className="label-vi text-sm mb-3">
+          Thông số lưới ĐKT — Nguyên mẫu vs Mô hình
+          <span className="label-en ml-2">Geogrid scaling (Bảng quy đổi lưới ĐKT)</span>
+        </h3>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Thông số</th>
+              <th>Nguyên mẫu</th>
+              <th>Mô hình 1:20</th>
+              <th>Quy luật tỷ lệ</th>
+              <th>Đơn vị</th>
+            </tr>
+          </thead>
+          <tbody>
+            {GEOGRID_SCALE_TABLE.map((row, i) => (
+              <tr key={i}>
+                <td>
+                  <div className="text-xs">{row.param}</div>
+                  <div className="text-[10px] text-surface-500">{row.nameEn}</div>
+                </td>
+                <td className="font-mono">{row.prototype}</td>
+                <td className="font-semibold text-emerald-400 font-mono">{row.model}</td>
+                <td className="text-xs text-primary-400 font-mono">{row.law}</td>
+                <td className="text-surface-400 text-xs">{row.unit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="text-xs text-surface-500 mt-2">
+          Quy đổi theo Garnier et al. (2007) và Ghazavi & Afshar (2013): n = 20 (tỷ lệ mô hình).
+          Biến dạng (ε) được bảo toàn; modulus đàn hồi (E) bảo toàn; độ cứng J và cường độ T giảm n lần.
+        </p>
       </div>
     </div>
   );

@@ -27,14 +27,14 @@ export const THESIS_INFO = {
 // ===== CÁC CẤP TẢI TRỌNG (kPa) =====
 export const PRESSURE_LEVELS = [18, 36, 54, 72, 90, 108, 120];
 
-// ===== TRẠNG THÁI ĐẤT NỀN (Bảng 3.11) =====
+// ===== TRẠNG THÁI ĐẤT NỀN (Bảng 3.11 — theo TCVN 5746:2024) =====
 export const SOIL_STATES: Record<SoilState, SoilStateInfo> = {
   IL_078: {
     id: 'IL_078',
     IL: 0.78,
     label: 'IL = 0,78',
     labelEn: 'Liquidity Index = 0.78',
-    state: 'Dẻo chảy',
+    state: 'Dẻo chảy (0,75 < IL ≤ 1,0)',
     cu: 20,
     Es: 1450,
     color: '#4e7ab9',
@@ -44,7 +44,7 @@ export const SOIL_STATES: Record<SoilState, SoilStateInfo> = {
     IL: 1.0,
     label: 'IL = 1,0',
     labelEn: 'Liquidity Index = 1.0',
-    state: 'Chảy',
+    state: 'Dẻo chảy – Chảy (IL = 1,0)',
     cu: 10,
     Es: 1050,
     color: '#f5b731',
@@ -54,7 +54,7 @@ export const SOIL_STATES: Record<SoilState, SoilStateInfo> = {
     IL: 1.5,
     label: 'IL = 1,5',
     labelEn: 'Liquidity Index = 1.5',
-    state: 'Chảy (IL = 1,5)',
+    state: 'Chảy (IL > 1,0)',
     cu: 5,
     Es: 850,
     color: '#6b7b8d',
@@ -86,14 +86,25 @@ export const COLUMN_MATERIAL: MaterialProperty[] = [
   { name: 'Cấp phối hạt', nameEn: 'Grain size', symbol: '–', unit: 'mm', value: '0.5–4.75', source: 'Mục 3.1.3' },  
 ];
 
-// ===== LƯỚI ĐỊA KỸ THUẬT (Bảng 3.7) =====
+// ===== LƯỚI ĐỊA KỸ THUẬT — MÔ HÌNH 1:20 (Bảng 3.7) =====
 export const GEOGRID_PROPERTIES: MaterialProperty[] = [
-  { name: 'Cường độ kéo khi đứt (dọc)', nameEn: 'Tensile strength at break (MD)', symbol: '–', unit: 'kN/m', value: 209.4, source: 'Bảng 3.7' },
-  { name: 'Độ giãn dài khi đứt (dọc)', nameEn: 'Elongation at break (MD)', symbol: '–', unit: '%', value: 12, source: 'Bảng 3.7' },
-  { name: 'CĐ kéo tại ε=2% (dọc)', nameEn: 'Tensile at 2% strain (MD)', symbol: '–', unit: 'kN/m', value: 41.4, source: 'Bảng 3.7' },
-  { name: 'CĐ kéo tại ε=5% (dọc)', nameEn: 'Tensile at 5% strain (MD)', symbol: '–', unit: 'kN/m', value: 78.7, source: 'Bảng 3.7' },
-  { name: 'CĐ kéo khi đứt (ngang)', nameEn: 'Tensile at break (CD)', symbol: '–', unit: 'kN/m', value: 105.7, source: 'Bảng 3.7' },
-  { name: 'Độ giãn dài khi đứt (ngang)', nameEn: 'Elongation at break (CD)', symbol: '–', unit: '%', value: 12, source: 'Bảng 3.7' },
+  { name: 'Cường độ kéo khi đứt (dọc)', nameEn: 'Tensile strength at break (MD)', symbol: 'Tult', unit: 'kN/m', value: 209.4, source: 'Bảng 3.7' },
+  { name: 'Độ giãn dài khi đứt (dọc)', nameEn: 'Elongation at break (MD)', symbol: 'εult', unit: '%', value: 12, source: 'Bảng 3.7' },
+  { name: 'CĐ kéo tại ε=2% (dọc)', nameEn: 'Tensile at 2% strain (MD)', symbol: 'T@2%', unit: 'kN/m', value: 41.4, source: 'Bảng 3.7' },
+  { name: 'CĐ kéo tại ε=5% (dọc)', nameEn: 'Tensile at 5% strain (MD)', symbol: 'T@5%', unit: 'kN/m', value: 78.7, source: 'Bảng 3.7' },
+  { name: 'CĐ kéo khi đứt (ngang)', nameEn: 'Tensile at break (CD)', symbol: 'Tult,CD', unit: 'kN/m', value: 105.7, source: 'Bảng 3.7' },
+  { name: 'Độ giãn dài khi đứt (ngang)', nameEn: 'Elongation at break (CD)', symbol: 'εult,CD', unit: '%', value: 12, source: 'Bảng 3.7' },
+];
+
+// ===== THÔNG SỐ LƯỚI ĐKT — NGUYÊN MẪU vs MÔ HÌNH (Bảng bang_thong_so_luoi_DKT) =====
+export const GEOGRID_SCALE_TABLE = [
+  { param: 'Loại lưới', nameEn: 'Type', prototype: 'PP/PET 200 kN/m', model: 'Thu nhỏ 1:20', unit: '' },
+  { param: 'Cường độ kéo đứt', nameEn: 'Tensile strength', prototype: 200, model: 10, unit: 'kN/m', law: 'Tm = Tp/n' },
+  { param: 'Độ cứng tại ε=2%', nameEn: 'Stiffness J@2%', prototype: 2070, model: 103.5, unit: 'kN/m', law: 'Jm = Jp/n' },
+  { param: 'Độ cứng thiết kế', nameEn: 'Design stiffness J', prototype: 2000, model: 100, unit: 'kN/m', law: 'Jm = Jp/n' },
+  { param: 'Kích thước mắt lưới', nameEn: 'Mesh aperture', prototype: '40×40', model: '2×2', unit: 'mm', law: 'am = ap/n' },
+  { param: 'Biến dạng dài khi đứt', nameEn: 'Elongation at break', prototype: 12, model: 12, unit: '%', law: 'εm = εp' },
+  { param: 'Khối lượng đơn vị', nameEn: 'Unit weight', prototype: '450–550', model: '23–28', unit: 'g/m²', law: 'γm = γp' },
 ];
 
 // ===== KẾT QUẢ TRỤ ĐƠN (Bảng 3.12, 3.13, 4.1, 4.2) =====
@@ -326,10 +337,81 @@ export const SPACING_RATIOS = {
   sD_35: { label: 's/D = 3,5', sD: 3.5, s_mm: 140, as: 6.41, density: '13 trụ/100m²' },
 };
 
-// ===== CÔNG THỨC ĐỀ XUẤT =====
+// ===== CÔNG THỨC ĐỀ XUẤT (Mục 4.5) =====
+
+// Công thức sức chịu tải giới hạn: qult = Nc × cu
 export const PROPOSED_FORMULAS = {
-  qult_no_geogrid: { formula: 'qult = 18,312 × cu', Nc: 18.312, description: 'Khi trụ VLHR không có lưới ĐKT' },
-  qult_with_geogrid: { formula: 'qult = 21,208 × cu', Nc: 21.208, description: 'Khi trụ VLHR kết hợp lưới ĐKT' },
+  qult_no_geogrid: {
+    formula: 'qult = 18,312 × cu',
+    Nc: 18.312,
+    description: 'Sức chịu tải giới hạn trụ VLHR — không có lưới ĐKT',
+    scope: 'IL = 0,78–1,0; cu = 5–20 kPa',
+    R2: 0.986,
+  },
+  qult_with_geogrid: {
+    formula: 'qult = 21,208 × cu',
+    Nc: 21.208,
+    description: 'Sức chịu tải giới hạn trụ VLHR — kết hợp lưới ĐKT',
+    scope: 'IL = 0,78–1,0; J = 100 kN/m (mô hình)',
+    R2: 0.991,
+    improvement: 15.8,
+  },
+};
+
+// Công thức hệ số tập trung ứng suất n = σc/σs (Mục 4.5)
+// Áp lực đất nền: σs = (A_s/D × s/D + B_s) × p
+// Ứng suất đỉnh trụ: σc = (A_c × s/D + B_c) × ln(p) + (C_c × s/D + D_c)
+export const N_FORMULA = {
+  // σs = (alpha_a × s/D + alpha_b) × p
+  sigma_s: { alpha_a: 0.253, alpha_b: 0.157 },
+  // σc = (A × s/D + B) × ln(p) − (C × s/D + D)
+  sigma_c: { A: 8.996, B: 55.83, C: 25.03, D: 112.48 },
+  scope: 's/D = 2,5–3,5; p = 18–120 kPa; IL > 0,75',
+  R2_sigma_c: 0.985,
+  R2_sigma_s: 0.993,
+  comparison_HanYe_error: 15,  // % lỗi của Han & Ye (2001)
+  proposed_error: 8,            // % lỗi tối đa của công thức đề xuất
+};
+
+// Tính toán n dựa trên công thức đề xuất
+export function calcNFormula(sD: number, p: number): { sigmaS: number; sigmaC: number; n: number } {
+  const { alpha_a, alpha_b } = N_FORMULA.sigma_s;
+  const { A, B, C, D } = N_FORMULA.sigma_c;
+  const sigmaS = (alpha_a * sD + alpha_b) * p;
+  const sigmaC = (A * sD + B) * Math.log(p) - (C * sD + D);
+  const n = sigmaC > 0 && sigmaS > 0 ? sigmaC / sigmaS : 0;
+  return { sigmaS, sigmaC, n };
+}
+
+// Tính qult theo công thức đề xuất
+export function calcQult(cu: number, withGeogrid: boolean): number {
+  const Nc = withGeogrid ? PROPOSED_FORMULAS.qult_with_geogrid.Nc : PROPOSED_FORMULAS.qult_no_geogrid.Nc;
+  return Nc * cu;
+}
+
+// Kết quả sức chịu tải đơn vị (Mục 4.1) — qult (kPa) theo cu của đất nền
+export const BEARING_CAPACITY_TABLE = [
+  { IL: 'IL_078', cu: 20, qult_no: 378, qult_geo: 426, Nc_no: 18.9, Nc_geo: 21.3, delta_pct: 12.7 },
+  { IL: 'IL_10',  cu: 10, qult_no: 187, qult_geo: 227, Nc_no: 18.7, Nc_geo: 22.7, delta_pct: 21.4 },
+  { IL: 'IL_15',  cu: 5,  qult_no: 148, qult_geo: 188, Nc_no: 29.6, Nc_geo: 37.6, delta_pct: 27.0 },
+];
+
+// E₅₀ theo IL (Mục 4.1)
+export const E50_TABLE = [
+  { IL: 'IL_078', E50_no: 12.5, E50_geo: 14.8, improvement_pct: 18.4 },
+  { IL: 'IL_10',  E50_no: 7.8,  E50_geo: 9.2,  improvement_pct: 17.9 },
+  { IL: 'IL_15',  E50_no: 3.2,  E50_geo: 3.5,  improvement_pct: 9.4 },
+];
+
+// Phạm vi áp dụng công thức
+export const FORMULA_SCOPE = {
+  IL_range: [0.75, 1.0],
+  cu_range: [5, 20],     // kPa (giá trị mô hình)
+  sD_range: [2.5, 3.5],
+  p_range: [18, 120],    // kPa
+  column_D_range: [0.6, 1.0],  // m (nguyên mẫu)
+  geogrid_J_prototype: 2000,   // kN/m
+  geogrid_J_model: 100,        // kN/m
 };
 
 // ===== CHART COLORS =====
