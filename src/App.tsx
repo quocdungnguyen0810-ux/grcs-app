@@ -17,10 +17,11 @@ import ChartsTab from './features/charts/ChartsTab';
 import MechanismTab from './features/mechanism/MechanismTab';
 import QualityControlTab from './features/quality-control/QualityControlTab';
 import NumericalSimTab from './features/numerical-sim/NumericalSimTab';
+import FormulaTab from './features/formula/FormulaTab';
 import {
   BookOpen, Box, Hammer, ListChecks, Beaker,
   GitCompare, Lightbulb, Menu, X, Monitor, GraduationCap, Presentation,
-  LocateFixed, Atom, TrendingUp, Shield, Cpu,
+  LocateFixed, Atom, TrendingUp, Shield, Cpu, FlaskConical,
   Smartphone, Tablet, Laptop,
 } from 'lucide-react';
 import type { ViewLayout } from './store/useAppStore';
@@ -55,6 +56,7 @@ const TAB_GROUPS: TabGroup[] = [
       { label: 'Phân tích cơ chế', labelEn: 'Mechanism Analysis', icon: Atom },
       { label: 'Phân tích ứng xử', labelEn: 'Behavior Analysis', icon: TrendingUp },
       { label: 'Mô phỏng số (FEM)', labelEn: 'Numerical Simulation', icon: Cpu },
+      { label: 'Công thức đề xuất', labelEn: 'Proposed Formulas', icon: FlaskConical },
       { label: 'Kết luận', labelEn: 'Conclusions', icon: Lightbulb },
     ],
   },
@@ -64,7 +66,7 @@ const TAB_GROUPS: TabGroup[] = [
 const TAB_COMPONENTS = [
   OverviewTab, ModelBasisTab,
   ModelTab, ModelConstructionTab, ProcedureTab, QualityControlTab,
-  ExperimentTab, ComparisonTab, MechanismTab, InsightsTab, NumericalSimTab, ChartsTab
+  ExperimentTab, ComparisonTab, MechanismTab, InsightsTab, NumericalSimTab, FormulaTab, ChartsTab
 ];
 
 const MODE_CONFIG = {
@@ -78,13 +80,13 @@ const BOTTOM_NAV = [
   { label: 'Tổng quan', icon: BookOpen, tabIdx: 0 },
   { label: 'Mô hình', icon: Box, tabIdx: 2 },
   { label: 'Thí nghiệm', icon: Beaker, tabIdx: 6 },
-  { label: 'So sánh', icon: GitCompare, tabIdx: 7 },
-  { label: 'Kết luận', icon: Lightbulb, tabIdx: 11 },
+  { label: 'Công thức', icon: FlaskConical, tabIdx: 11 },
+  { label: 'Kết luận', icon: Lightbulb, tabIdx: 12 },
 ];
 
 // Storyline steps
-const STORYLINE = ['Tổng quan', 'Cơ sở', 'Mô hình', 'Chế tạo', 'Quy trình', 'QC', 'Mô phỏng', 'So sánh', 'Cơ chế', 'Ứng xử', 'FEM', 'Kết luận'];
-const STORYLINE_MAP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+const STORYLINE = ['Tổng quan', 'Cơ sở', 'Mô hình', 'Chế tạo', 'Quy trình', 'QC', 'Mô phỏng', 'So sánh', 'Cơ chế', 'Ứng xử', 'FEM', 'CT đề xuất', 'Kết luận'];
+const STORYLINE_MAP = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const VIEW_LAYOUT_CONFIG: Record<ViewLayout, { icon: React.ElementType; label: string }> = {
   mobile: { icon: Smartphone, label: 'Mobile' },

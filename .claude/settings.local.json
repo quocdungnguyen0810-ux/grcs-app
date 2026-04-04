@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c)",
+      "Bash(pandoc \"E:\\\\OneDrive\\\\Haihageot\\\\NCS 2022\\\\5.Bảo vệ cấp cơ sở\\\\NCS. Nguyễn Hải Hà Bảo vệ cấp cơ sở\\\\NCSNHH. Luận án\\\\PGS. NQP\\\\Muc_3.2_hoan_chinh.docx\" -t markdown)",
+      "Read(//e/tmp/**)",
+      "Bash(pandoc \"E:/OneDrive/Haihageot/NCS 2022/5.Bảo vệ cấp cơ sở/NCS. Nguyễn Hải Hà Bảo vệ cấp cơ sở/NCSNHH. Luận án/PGS. NQP/NCS.NHH. Bản chi tiết nhận xét các vấn đề cần sửa chữa.docx\" -t plain)",
+      "Bash(pandoc \"E:\\\\OneDrive\\\\Haihageot\\\\NCS 2022\\\\5.Bảo vệ cấp cơ sở\\\\NCS. Nguyễn Hải Hà Bảo vệ cấp cơ sở\\\\NCSNHH. Luận án\\\\PGS. NQP\\\\Muc_4.1_hoan_chinh.docx\" -t markdown)",
+      "Bash(pandoc \"E:/OneDrive/Haihageot/NCS 2022/5.Bảo vệ cấp cơ sở/NCS. Nguyễn Hải Hà Bảo vệ cấp cơ sở/NCSNHH. Luận án/PGS. NQP/Muc_4_3_Hoan_chinh.docx\" -t plain)",
+      "Bash(pandoc \"E:\\\\OneDrive\\\\Haihageot\\\\NCS 2022\\\\5.Bảo vệ cấp cơ sở\\\\NCS. Nguyễn Hải Hà Bảo vệ cấp cơ sở\\\\NCSNHH. Luận án\\\\PGS. NQP\\\\Muc_4.2_hoan_chinh.docx\" -t markdown)",
+      "Read(//tmp/**)",
+      "Bash(sed 's/<w:t[^>]*>/\\\\n/g; s/<\\\\/w:t>.*/\\\\n/g' word/document.xml)",
+      "Bash(grep -v '^$')",
+      "Bash(unzip -p \"E:/OneDrive/Haihageot/NCS 2022/5.Bảo vệ cấp cơ sở/NCS. Nguyễn Hải Hà Bảo vệ cấp cơ sở/NCSNHH. Luận án/PGS. NQP/Muc_3.1_chinh_sua_bo_sung.docx\" word/document.xml)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
