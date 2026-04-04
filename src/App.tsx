@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// @ts-ignore -- Vite handles jpg imports
+import utcLogo from '../geot.utc.jpg';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from './store/useAppStore';
 import { APP_VERSION } from './lib/version';
@@ -97,9 +99,11 @@ export default function App() {
 
         {/* UTC branding */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-accent-400/20 flex items-center justify-center text-accent-400 font-bold text-xs">
-            UTC
-          </div>
+          <img
+            src={utcLogo as string}
+            alt="Bộ môn Địa kỹ thuật — UTC"
+            className="w-9 h-9 rounded-full object-cover ring-2 ring-accent-400/40 shrink-0"
+          />
           <div className="flex-1 min-w-0">
             <h1 className="text-sm font-semibold text-surface-100 truncate">
               Trụ VLHR + Lưới ĐKT
@@ -180,8 +184,12 @@ export default function App() {
               </nav>
               <div className="p-3 border-t border-surface-800">
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="w-5 h-5 rounded bg-accent-400/15 flex items-center justify-center text-accent-400 text-[8px] font-bold">UTC</div>
-                  <p className="text-xs text-surface-400">{APP_VERSION.university}</p>
+                  <img
+                    src={utcLogo as string}
+                    alt="UTC Logo"
+                    className="w-7 h-7 rounded-full object-cover ring-1 ring-accent-400/30 shrink-0"
+                  />
+                  <p className="text-xs text-surface-400 truncate">{APP_VERSION.university}</p>
                 </div>
                 <p className="text-[10px] text-surface-600">Model 1:20 · MHVL 1g · v{APP_VERSION.version}</p>
               </div>
